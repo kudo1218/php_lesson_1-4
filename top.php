@@ -17,38 +17,28 @@
   <?php
     function battle() {
       $result = $_GET[result];
-      $enemy = rand(1,3);
-      switch($enemy) {
-        case 1:
-          $enemyResult = "グー";
+      $choice = ['グー','チョキ','パー'];
+      $key = array_rand($choice);
+      $enemyResult = $choice[$key];
+      switch($enemyResult) {
+        case ($enemyResult === $result):
+          $message = 'あいこ';
           break;
-        case 2:
-          $enemyResult = "チョキ";
+        case 'グー':
+          $message = ($result === 'チョキ') ? 'あなたの敗北です。。。' : 'あなたの勝利です！';
           break;
-        case 3:
-          $enemyResult = "パー";
+        case 'チョキ':
+          $message = ($result === 'パー') ? 'あなたの敗北です。。。' : 'あなたの勝利です！';
           break;
-      }
-      if($result == $enemyResult) {
-        $message = "あいこ";
-      }else if($result == "グー" && $enemyResult == "パー") {
-        $message = "あなたの敗北です。。。";
-      }else if($result == "チョキ" && $enemyResult == "グー") {
-        $message = "あなたの敗北です。。。";
-      }else if($result == "パー" && $enemyResult == "チョキ") {
-        $message = "あなたの敗北です。。。";
-      }else if($result == "グー" && $enemyResult == "チョキ") {
-        $message = "あなたの勝利です！";
-      }else if($result == "チョキ" && $enemyResult == "パー") {
-        $message = "あなたの勝利です！";
-      }else if($result == "パー" && $enemyResult == "グー") {
-        $message = "あなたの勝利です！";
+        case 'パー':
+          $message = ($result === 'グー') ? 'あなたの敗北です。。。' : 'あなたの勝利です！';
+          break;
       }
       echo '自分：' . $result . '<br>';
       echo '相手：' . $enemyResult . '<br>';
       echo $message;
     }
-    if(!empty(result)) {
+    if(!empty($_GET[result])) {
       battle();
     }
   ?>
