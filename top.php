@@ -5,7 +5,7 @@
   <title>課題1-4</title>
 </head>
 <body>
-  <form method="get">
+  <form method="post">
     <select name="result">
       <option value="グー">グー</option>
       <option value="チョキ">チョキ</option>
@@ -16,7 +16,7 @@
   </form>
   <?php
     function battle() {
-      $result = $_GET[result];
+      $result = $_POST[result];
       $choice = ['グー','チョキ','パー'];
       $key = array_rand($choice);
       $enemyResult = $choice[$key];
@@ -38,7 +38,7 @@
       echo '相手：' . $enemyResult . '<br>';
       echo $message;
     }
-    if(!empty($_GET[result])) {
+    if(!empty($_POST[result])) {
       battle();
     }
   ?>
